@@ -395,11 +395,9 @@ so the return keywords does not only return the value but it also immediately fi
   jane['lastName'] = 'Smith';
   console.log(jane);*/
 
-  /*********************************
-    Objects and methods
-  */
+  /*                        Objects and methods                 */
 
-  /* so far we learnd the objects can hold different types of date including Arrais and other objects but we can also attach functions to objects and this functions are called methods*/
+  /* so far we learnd the objects can hold different types of data including Arrais and other objects but we can also attach functions to objects and this functions are called methods*/
 
   var john = {
       firstName: 'John',
@@ -415,7 +413,7 @@ so the return keywords does not only return the value but it also immediately fi
   console.log(john.calcAge(1990));
 
   // methods basics
-  /* instead of passing in the birht year inside the methods we can use built-in functions called this.*/
+  /* instead of passing in the birthYear inside the methods we can use built-in functions called this.*/
 
   var john = {
       firstName: 'John',
@@ -424,7 +422,7 @@ so the return keywords does not only return the value but it also immediately fi
       family: ['Jane', 'Mark', 'Bob', 'Emily'],
       job: 'teacher',
       isMarried: false,
-      calcAge: function(birthYear) {
+      calcAge: function(/*birthYear*/) {
         return 2018 - this.birthYear; // this = var john
       }
   };
@@ -443,7 +441,7 @@ so the return keywords does not only return the value but it also immediately fi
       family: ['Jane', 'Mark', 'Bob', 'Emily'],
       job: 'teacher',
       isMarried: false,
-      calcAge: function(birthYear) {
+      calcAge: function(/*birthYear*/) {
         return this.age = 2018 - this.birthYear; // this = var john
       }
   };
@@ -532,3 +530,97 @@ so the return keywords does not only return the value but it also immediately fi
 
       in the first part of the course we will use ES5 and then move to ES6+,
       ES7 ES8 2nd part.
+
+      JavaScript codes(executed) have to be host in some environment and that is most typically a browser (google chrome, firefox , etc..) this is where JavaScript runs. there can also be other hosts such as the NoJS web server or even some applications that accept JavaScript code input.
+      ** we will be focusing in the browser in this course. */
+
+      /*             Executing Context and the execution Stack            */
+      /*
+      in what order the code run? for that we need to understand the Executing Context. all JavaScript code need to be run in an environment, and those environment are called Execution context.
+      the default is global Execution Context which is for variables and functions that are not inside of any function. we can also think about execution context as an object which in case of the browser its the window object.
+
+    var name = 'John'; => global function
+
+    function first() {
+          var a = 'Hello!';     => all this function is also global execution
+          second();                 Context
+          var x = a + name;
+    }
+
+    function second() {
+      var b = 'Hi!';              => all this function is also global execution
+    third();                       Context
+    var = z = b + name;
+    }
+
+    function third() {
+        var c = 'Hey!';
+        var z = c + name;
+    }
+
+    first(); here we called the very first function. a new function gets its new execution context. whats happens is that this new context is put on top of the current context. forming so called execution Stack.
+    whats happens now is that the "a" var (in the first function) will now get stored in the execution context for this function and not any more in the global context.
+    now we call the second function, and once again a new execution context will be created and put on top of the execution stack and it will continue like that till the third function which there we dont have any nest function inside, so it will done its work, its doesnt contiue to any other function, in other words its not trigger another function. so whats happens now its when the third function done its get off the execution context (the function returns).
+    so whats happens to his execution context? its just gets removed from the top of the stack. same happens to the second function and the first function. */
+
+    /*                      The variable objects                        */
+
+    /*
+    * the argument objects created, containing all the arguments that were passed into the function.
+
+    * Code is scanned for function declarations for each function, a property   is created in the Variable Object, pointing to the function.
+
+    * Code is scanned for variable declarations: for each variable, a property is created in the Variable Object, and set to undifined.
+
+    the last 2 stars are called hoisting */
+
+    /*                Hoisting in Practice  - in path complete-JavaScript-course/3-how-JS-works/starter/script.js */
+
+    /*            Scoping and the scope Chain  */
+
+    /*
+    The creation of the scoping chain. what does it mean?
+    * scoping answer the question "where can we access a certain variables?"
+
+    * Each new function create scope: the space/environment, in which the variables it defines are accessible.
+    In JavaScript the only way that we have to create a new scope is to write a new function and this is somthing important in JavaScript.
+
+    * Lexical scoping: a function that is lexically within another function gets access to the scope of the outer function.
+
+    -----------------------------------------
+    |  var a = 'Hello!';          Global scope
+    |  first();                      VO global
+    |                             can see only a
+    |  function first() {
+    |     -------------------------------------
+    |     | var b = 'Hi';           first() scope
+    |     | second();               [VO1] + [VOglobal]
+    |     |                         can see only a + b
+    |     | function second() {
+    |     |     -----------------------------
+    |     |     | var c = 'Hey!';         scond() scope   |
+    |     |     | console.log(a + b + c); [VO2] + [VO1] +
+    |     | }   |                         [VOglobal]
+    |     |     |                         can see a + b + c
+    |     |     -----------------------------
+    | }     ----------------------------------
+    ----------------------------------------------
+    what is happening is that JavaScript searching for variable a in the most inner scope and when it not finding it, js goes upper and searching in the first scope and again its not finding it so it goes more up to the global scope and there it finds the 'a' variable.
+    Note! - IT CANNOT WORK BACKWARDS, for example global scope will never ever will have access to the variables b + c unless we return the values from the functions. so localy variables are not visiable to their parent scopes
+
+    in this example, in the second scope we have access to the variable object of the second function of the first function and to global variable object what will happened in practice?
+    find the practice in path complete-JavaScript-course/3-how-JS-works/starter/script.js*/
+
+    /*                        this keyword                 */
+
+    /* "this" variable is a variable that each and every execution context gets and its stored in the execution context object.
+
+    where does it points?
+
+    Regular function call: the this keyword points at the global object (the window object, in the browser).
+
+    Method call: the this variable points to the object that is calling the method.
+
+    the this keyword is not assigned a value until a function where it is defined is actually called.
+
+    practice at path complete-JavaScript-course/3-how-JS-works/starter/script.js
