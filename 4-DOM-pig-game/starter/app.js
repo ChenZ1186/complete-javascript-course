@@ -227,6 +227,8 @@ function btn(){
           // so now we can use something called taggled which says that if the class is active then add the active there and if the class is not active then remove it from there.
           document.querySelector('.player-0-panel').classList.toggle('active');
           document.querySelector('.player-1-panel').classList.toggle('active');
+          // last thing is to hide the dice once the turn switch to another player.
+          document.querySelector('.dice').style.display = 'none';
     });
 
 /*.addEventListener()
