@@ -249,3 +249,45 @@ in side there we have all the documentation for javascript html css*/
    document.getElementById('current-0').textContent = '0';
    document.getElementById('current-1').textContent = '0';
 // in this case we dont use the CSS style so we dont use the hash symbol "#".
+
+/*    Implementing Our 'Hold' function and the DRY principle      */
+
+/*
+  * How to use functions to correctly apply the DRY principle
+  * how to think about the game logic like programmer
+  we will use the event listener one more time for the other buttons
+   */
+   document.querySelector('.btn-hold').addEventListener('click', function () {
+     // when pressing the hold button we will add the current score to the global score.
+     scores[activePlayer] += roundScore
+     // update the UI in the interface
+     document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer]
+     // check if player won the game.
+   })
+
+   /*
+   scores = [0,0];
+   roundScore = 0;
+   activePlayer = 0;
+
+   // disable the dice image when reloading the page
+   document.querySelector('.dice').style.display = 'none';
+   // reset all scores to "0"
+   document.getElementById('score-0').textContent = '0';
+   document.getElementById('score-1').textContent = '0';
+   document.getElementById('current-0').textContent = '0';
+   document.getElementById('current-1').textContent = '0';
+   */
+
+   /* state variable */
+
+   /* a state variable tell us the condition of a system.
+   we need a state variale when we need to remember something or the state of something in our case is : is the game playing or is the game not playing.
+
+   the state variale is a boolean type.
+   so we set it in couple of places.
+   1) we wrote the var at the top so it would be undifined and also it will be in the global scope.
+   2) we set the var "gamePlaying" to true in the init function
+   3) we set the variale in an if statment inside the roll button and also in the outer scope of the hold button.
+   4) inside the hold button where we check if the player won we set the var gamePlaying to false   */
+   
