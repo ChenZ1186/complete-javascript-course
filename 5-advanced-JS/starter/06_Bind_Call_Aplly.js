@@ -109,7 +109,8 @@ john.presentation.call(emily, 'friendly', 'afternoon');
 So what can we do here? 
 I would say that the best solution is to pass in our isFullAge function, but with the limit already preset.
 
-we use the bind method because bind allows us to create a copy of a function with a preset argument
+we use the bind method because bind allows us to create a copy of a function with a preset argument.
+isFullAge, so we will not just pass this function like this, but we will use the bind method on it before passing it, so now we can preset the argument. So first the this keyword, don't forget this, the first thing always has to be the this keyword, and in this case we don't really care about it, so we just say this, and then our preset limit which is 20. Okay and now what will be passed into the arrayCalc function is not simply going to be the FullAge function, but a copy of the isFull function with 20 as the preset argument for the limit.
 */
 
 
